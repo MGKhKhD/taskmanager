@@ -29,7 +29,7 @@ class TodoCategoryButtons extends Component{
     render(){
         if(this.state.clickingTodoHead){
             return(<React.Fragment>
-            <span className="badge badge-light badge-pill offset-1"
+            <span className="badge badge-light badge-pill offset-6"
                   onClick={()=> {
                       this.setState({clickingTodoHead: false});
                   }}>
@@ -39,7 +39,7 @@ class TodoCategoryButtons extends Component{
             </React.Fragment>);
         }
         else{
-            return <span className="badge badge-light badge-pill offset-1"
+            return <span className="badge badge-light badge-pill offset-6"
             onClick={()=> this.setState({clickingTodoHead: true})}>
             ...</span>;
         }

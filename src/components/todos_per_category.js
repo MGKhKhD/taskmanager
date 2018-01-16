@@ -24,7 +24,7 @@ class TodoRow extends Component{
         const elementTodos = this.props.todos.forEach(todo1 =>{
             const todo = todo1.todo;
             const fontColor= todo.deadline === Infinity? 'red' : '#1B1B1B';
-            const todoExpireDate = todo.deadline === Infinity? '+Inf' : todo.deadline;
+            const todoExpireDate = todo.deadline.slice(0, 10);
                 if(this.props.category === todo.category){
                     subRows.push(
                     <React.Fragment key={todo1.id}>

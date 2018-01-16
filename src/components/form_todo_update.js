@@ -16,6 +16,7 @@ class TodoDatePicker extends Component {
         return (
             <div>
                 <DatePicker
+                    required={true}
                     onChange={date => {
                         this.setState({ date });
                         this.props.addDate(this.state.date);
@@ -30,7 +31,7 @@ class TodoDatePicker extends Component {
   class FormTodoUpdate extends Component {
     constructor(props){
       super(props);
-      this.state={todo: '', startDate: '', expireDate:''};
+      this.state={todo: '', startDate: new Date(), expireDate: new Date()};
       this.focus = true;
   }
 
@@ -40,8 +41,9 @@ class TodoDatePicker extends Component {
 
   onSubmit(e){
       e.preventDefault();
-      console.log(this.state);
-      this.props.handleTodo(this.state);
+      this.props.handleTodo({todo: this.state.todo,
+      startDate: this.state.startDate.toISOString(),
+      expireDate: this.state.expireDate.toISOString()});
       this.setState({todo: '', startDate: '', expireDate:''});
   }
 
@@ -52,8 +54,8 @@ class TodoDatePicker extends Component {
           <input type="text" placeholder={placeholderText} autoFocus={this.focus}
           onChange={this.getNewInput.bind(this)}
           value={this.state.todo}/>
-          <TodoDatePicker addDate={(date) =>this.setState({startDate: date})} />
-              <TodoDatePicker addDate={(date) =>this.setState({expireDate: date})} />
+          <TodoDatePicker addDate={(date) =>this.setState({startDate: date})}/>
+              <TodoDatePicker addDate={(date) =>this.setState({expireDate: date})}/>
                   <button type="submit">Add Todo</button>
               </form>
           <FooterTodoForm applyTodoUpdate={(action) => console.log(action)}/>

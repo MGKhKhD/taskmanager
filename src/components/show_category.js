@@ -14,8 +14,8 @@ class ShowTodosCategory extends Component{
         const { todosCategory, todos } = this.props; 
 
         todosCategory.forEach((category) => {
-            rows.push(
-                <TodoCategoryRow key={category.id}
+            rows.push(<React.Fragment key={category.id}>
+                <TodoCategoryRow
                 category={category} todos={todos}
                 handleTodoCategoryModification={(data) =>
                 { const newData={id: category.id,
@@ -30,11 +30,16 @@ class ShowTodosCategory extends Component{
                 secondStageTodoUpdate={(todo)=>this.props.handlingTodoUpdate(todo)}
                                  canclingOtherCategoryModification={(todoHead)=>
                                  this.props.makingSureOnlyOneCategoryIsUpdatable(todoHead)}
-                                 categoryUnderUpdate={this.props.categoryUnderUpdate}/>)
+                                 categoryUnderUpdate={this.props.categoryUnderUpdate}/>
+                <hr style={{ border: '0',
+                    height: '0',
+                    borderTop: '1px solid rgba(0, 0, 0, 0.1)',
+                    borderBottom: '1px solid rgba(255, 255, 255, 0.3)'}} />
+            </React.Fragment>)
                 });
 
         return(
-            <ul className="offset-1" style={{listStyle: 'none'}}>
+            <ul  style={{listStyle: 'none'}}>
                 {rows}
             </ul>
         );

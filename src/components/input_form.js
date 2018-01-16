@@ -44,7 +44,10 @@ class InputForm extends Component{
                 <span>
                     <FooterInputForm applyFilter={(action) => this.props.startApplyingFilter(action)}/>
                 </span> }
-                <hr />
+                <hr style={{ height: '2px',
+                    border: '0',
+                    backgroundImage: 'linear-gradient(to right, #ccc, #333, #ccc)',
+                    background: '#333'}}/>
         </div>
         );
     }
