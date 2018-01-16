@@ -174,24 +174,25 @@ class App extends Component{
     }
 
     onHandleTodo(newTodo){
-        const id = this.state.allowingNewTodo;
-        let { todosCategory } = this.state;
-        let addedTodo;
-        for (let index=0; index < todosCategory.length; index++){
-            if(todosCategory[index].id === id){
-                addedTodo = {
-                    task: newTodo.todo,
-                    comments: [],
-                    commentsDate:[],
-                    createdTime: newTodo.startDate,
-                    deadline: newTodo.expireDate,
-                    category: todosCategory[index].todoCategory};
+        if(newTodo.todo){
+            const id = this.state.allowingNewTodo;
+            let { todosCategory } = this.state;
+            let addedTodo;
+            for (let index=0; index < todosCategory.length; index++){
+                if(todosCategory[index].id === id){
+                    addedTodo = {
+                        task: newTodo.todo,
+                        comments: [],
+                        commentsDate:[],
+                        createdTime: newTodo.startDate,
+                        deadline: newTodo.expireDate,
+                        category: todosCategory[index].todoCategory};
+                }
+            }
+            if(addedTodo){
+                this.todosDB.push().set({ todo: addedTodo});
             }
         }
-        if(addedTodo){
-            this.todosDB.push().set({ todo: addedTodo});
-        }
-
         this.setState({allowingNewTodo: false});
     }
 
@@ -214,9 +215,11 @@ class App extends Component{
         const elementInputForm = todoDecision?  
         <FormTodoUpdate handleTodo={this.onHandleTodo.bind(this)}
         gettingNewTodo={this.state.allowingNewTodo}
-        updatingTodo={this.state.shouldTodoUpdate}/> :
+        updatingTodo={this.state.shouldTodoUpdate}
+        calcellationOfTodoUpdate={()=>{this.setState({allowingNewTodo: false, shouldTodoUpdate: false})}}/> :
         <InputForm startApplyingFilter={this.filterAction.bind(this)}
                     handleTodoCategory={this.onHandleTodoCategory.bind(this)}
+                    cancellationOfOtherTasks={()=>{this.setState({categoryUnderUpdate: ''})}}
                     />
         return(<div>
                 <br />

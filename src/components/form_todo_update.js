@@ -1,32 +1,11 @@
 import React, {Component} from 'react';
-import DatePicker from 'react-date-picker';
+
 
 import FooterTodoForm from './footer_todo_form';
-
-class TodoDatePicker extends Component {
-    constructor(props){
-        super(props);
-        this.state = {
-            date: new Date(),
-        };
-    }
+import PickDate from './PickingDate/piking_date';
 
 
-    render() {
-        return (
-            <div>
-                <DatePicker
-                    required={true}
-                    onChange={date => {
-                        this.setState({ date });
-                        this.props.addDate(this.state.date);
-                    }}
-                    value={this.state.date}
-                />
-            </div>
-        );
-    }
-}
+
   
   class FormTodoUpdate extends Component {
     constructor(props){
@@ -49,16 +28,27 @@ class TodoDatePicker extends Component {
 
   render(){
       const placeholderText = !!this.props.gettingNewTodo? "add new todo" : "update todo"; 
-      return( <div>
-              <form onSubmit={this.onSubmit.bind(this)}>
-          <input type="text" placeholder={placeholderText} autoFocus={this.focus}
+      return( <div >
+        <form onSubmit={this.onSubmit.bind(this)} > 
+          <input type="text"  className="col-md-6 "
+          placeholder={placeholderText} autoFocus={this.focus}
           onChange={this.getNewInput.bind(this)}
           value={this.state.todo}/>
-          <TodoDatePicker addDate={(date) =>this.setState({startDate: date})}/>
-              <TodoDatePicker addDate={(date) =>this.setState({expireDate: date})}/>
-                  <button type="submit">Add Todo</button>
+          <button style={{marginLeft: '10px'}} type="submit" className="btn btn-primary" 
+          disabled={!this.state.todo}>Add </button>
+          <button style={{marginLeft: '5px'}} type="butoon" className="btn btn-secondary" 
+          onClick={()=>this.props.calcellationOfTodoUpdate(this)}>Cancel</button>
+          <button style={{marginLeft: '5px'}} type="butoon" className="btn btn-info" >More</button>
+          <div className="row">
+          <label > Start Date:
+          <PickDate addDate={(date)=>this.setState({startDate: date.startDate})} />
+          </label>
+          <pre>   </pre>
+          <label> Expire Date:
+          <PickDate addDate={(date)=>this.setState({expireDate: date.expireDate})} />
+          </label>
+              </div>     
               </form>
-          <FooterTodoForm applyTodoUpdate={(action) => console.log(action)}/>
               <hr />
       </div>
       );

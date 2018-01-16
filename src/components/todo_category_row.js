@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 
 import TodoCategoryButtons from './todo_category_buttons';
 import TodoRow from './todos_per_category';
-
 import reshapeComponentWithLiTag  from './utils/reshap_component_with_li_tag';
 
 const TodoCategoryRowBaseComponent = reshapeComponentWithLiTag(TodoCategoryButtons);
@@ -43,7 +42,11 @@ class TodoCategoryRow extends Component{
             {this.props.category.todoCategory}
         </TodoCategoryRowBaseComponent>);
 
-        const elementMofiable = (<div><input  autoFocus="true"
+        const elementMofiable = (<div>
+            <span className="badge badge-light badge-pill"
+            onClick={()=> this.setState({shouldCategoryModify: false})}>
+            X</span>
+            <input  autoFocus="true"
         value={this.state.modifiedInput} 
         placeholder={this.props.category.todoCategory}
         onChange={(e) => {
