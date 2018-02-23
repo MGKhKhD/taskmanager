@@ -43,9 +43,8 @@ class TodoCategoryRow extends Component{
         </TodoCategoryRowBaseComponent>);
 
         const elementMofiable = (<div>
-            <span className="badge badge-light badge-pill"
-            onClick={()=> this.setState({shouldCategoryModify: false})}>
-            X</span>
+            <button className="btn-danger "
+                    onClick={()=> this.setState({shouldCategoryModify: false})}>X</button>
             <input  autoFocus="true"
         value={this.state.modifiedInput} 
         placeholder={this.props.category.todoCategory}

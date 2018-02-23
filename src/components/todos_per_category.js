@@ -28,7 +28,7 @@ class TodoRow extends Component{
                 if(this.props.category === todo.category){
                     subRows.push(
                     <React.Fragment key={todo1.id}>
-                                <li
+                                <li className="offset-1"
                                 onClick={() => {
                                 this.props.initiatingTodoUpdate(todo);
                                 this.setState({needsUpdating: true});
